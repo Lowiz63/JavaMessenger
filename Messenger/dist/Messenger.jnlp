@@ -8,11 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Messenger.jar" size="2687" download="eager" />
+    <jar href="Messenger.jar" size="2913" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Messenger" >
     <param name="requiredFXVersion" value="8.0+"/>
   </applet-desc>
-  <jfx:javafx-desc  width="800" height="600" main-class="messenger.Messenger"  name="Messenger" />
+  <jfx:javafx-desc  width="800" height="600" main-class="launch.Messenger"  name="Messenger" />
   <update check="always"/>
 </jnlp>

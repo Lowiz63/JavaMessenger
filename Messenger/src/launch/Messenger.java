@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package messenger;
+package launch;
 
 import java.io.IOException;
 import javafx.application.Application;
@@ -20,8 +20,9 @@ public class Messenger extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/messenger/MainWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/ihm/MainWindow.fxml"));
         Scene scene = new Scene(root,1000,500);
+        primaryStage.setTitle("Messenger");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
