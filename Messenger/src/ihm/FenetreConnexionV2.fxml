@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="430.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.151" fx:controller="controller.FenetreConnexionV2Controller">
+   <children>
+      <VBox prefHeight="700.0" prefWidth="430.0">
+         <children>
+            <Label text="Pseudo : " translateX="190.0" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="200.0" translateX="110.0" />
+            <Label text="Mot de passe :" translateX="175.0" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="200.0" translateX="110.0" />
+            <HBox prefHeight="40.0" prefWidth="178.0">
+               <children>
+                  <Label alignment="CENTER" text="Se connecter" translateX="110.0">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox prefHeight="25.0" prefWidth="98.0" promptText="En ligne" translateX="110.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
