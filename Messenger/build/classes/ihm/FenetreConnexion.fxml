@@ -23,12 +23,12 @@
             <VBox prefHeight="138.0" prefWidth="311.0" GridPane.columnIndex="1">
                <children>
                   
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="180.0" promptText="Pseudo" />
-                  
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="180.0" promptText="Mot de passe">
+                  <TextField fx:id="txtPseudo" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="180.0" promptText="Pseudo" />
+                  <PasswordField fx:id="txtPassword" maxWidth="-Infinity" prefWidth="180.0" promptText="Mot de passe">
                      <VBox.margin>
                         <Insets top="15.0" />
-                     </VBox.margin></TextField>
+                     </VBox.margin>
+                  </PasswordField>
                   <CheckBox mnemonicParsing="false" text="Se souvenir de moi">
                      <VBox.margin>
                         <Insets top="15.0" />
@@ -40,8 +40,8 @@
                <children>
                   <HBox prefHeight="44.0" prefWidth="311.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Se connecter" />
-                        <Button mnemonicParsing="false" onMouseClicked="#onExit" prefHeight="25.0" prefWidth="100.0" text="Annuler">
+                        <Button mnemonicParsing="false" onAction="#openMain" prefHeight="25.0" prefWidth="100.0" text="Se connecter" />
+                        <Button mnemonicParsing="false" onAction="#onExit" prefHeight="25.0" prefWidth="100.0" text="Annuler">
                            <HBox.margin>
                               <Insets left="50.0" />
                            </HBox.margin>

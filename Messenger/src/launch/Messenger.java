@@ -25,7 +25,7 @@ public class Messenger extends Application {
         primaryStage.setScene(new Scene(root,500,400));
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
-        primaryStage.setTitle("Messenger");
+        primaryStage.setTitle("Java Messenger - Connexion");
         
         primaryStage.show();
     }

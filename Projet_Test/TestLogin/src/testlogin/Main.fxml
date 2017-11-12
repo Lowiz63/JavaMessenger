@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="testlogin.MainFXMLController">
+   <children>
+      <Label layoutX="95.0" layoutY="137.0" prefHeight="27.0" prefWidth="128.0" text="Main Window">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="188.0" layoutY="14.0" mnemonicParsing="false" onAction="#deconnexion" text="Se déconnecter" />
+   </children>
+</AnchorPane>

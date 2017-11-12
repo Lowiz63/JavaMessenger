@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="430.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.151" fx:controller="controller.FenetreInscriptionController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FenetreInscriptionController">
    <children>
       <VBox prefHeight="102.0" prefWidth="431.0">
          <children>
@@ -18,7 +17,7 @@
                   <Font size="21.0" />
                </font>
                <VBox.margin>
-                  <Insets left="110.0" top="20.0" />
+                  <Insets left="110.0" top="30.0" />
                </VBox.margin>
             </Label>
             <Label text="Java Messenger">
@@ -31,6 +30,17 @@
             </Label>
          </children>
       </VBox>
-      <Label mnemonicParsing="false" fx:id="testcenter" BorderPane.alignment="CENTER" layoutX="43.0" layoutY="144.0" text="Centre" />
+      <TextField fx:id="txtNom" layoutX="126.0" layoutY="150.0" maxWidth="-Infinity" prefWidth="180.0" />
+      <TextField fx:id="txtPrenom" layoutX="126.0" layoutY="200.0" maxWidth="-Infinity" prefWidth="180.0" />
+      <TextField fx:id="txtPseudo" layoutX="126.0" layoutY="253.0" maxWidth="-Infinity" prefWidth="180.0" />
+      <PasswordField fx:id="txtPassword" layoutX="126.0" layoutY="304.0" maxWidth="-Infinity" prefWidth="180.0" />
+      <PasswordField fx:id="txtPassword2" layoutX="126.0" layoutY="355.0" maxWidth="-Infinity" prefWidth="180.0" />
+      <Button layoutX="91.0" layoutY="416.0" mnemonicParsing="false" onAction="#onExit" prefWidth="70.0" text="Annuler" />
+      <Button layoutX="271.0" layoutY="416.0" mnemonicParsing="false" onAction="#onInscription" prefWidth="70.0" text="S'inscrire" />
+      <Label layoutX="126.0" layoutY="133.0" text="Nom" />
+      <Label layoutX="126.0" layoutY="183.0" text="Prénom" />
+      <Label layoutX="126.0" layoutY="236.0" text="Pseudo" />
+      <Label layoutX="126.0" layoutY="287.0" text="Mot de passe" />
+      <Label layoutX="126.0" layoutY="338.0" text="Confirmer votre mot de passe" />
    </children>
 </AnchorPane>

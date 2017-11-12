@@ -9,8 +9,10 @@
         </group>
         <group name="Example">
             <file>file:/D:/Bibliothèques/Documents/Java%20Projects/Java%20Messenger/JavaMessenger/Messenger/src/controller/FenetreConnexionController.java</file>
+            <file>file:/D:/Bibliothèques/Documents/Java%20Projects/Java%20Messenger/JavaMessenger/Messenger/src/controller/FenetreChatController.java</file>
+            <file>file:/D:/Bibliothèques/Documents/Java%20Projects/Java%20Messenger/JavaMessenger/Messenger/src/ihm/FenetreChat.fxml</file>
             <file>file:/D:/Bibliothèques/Documents/Java%20Projects/Java%20Messenger/JavaMessenger/Messenger/src/launch/Messenger.java</file>
-            <file>file:/D:/Bibliothèques/Documents/Java%20Projects/Java%20Messenger/JavaMessenger/Messenger/src/ihm/FenetreConnexion.fxml</file>
+            <file>file:/D:/Bibliothèques/Documents/Java%20Projects/Java%20Messenger/JavaMessenger/Messenger/src/controller/FenetreInscriptionController.java</file>
         </group>
     </open-files>
 </project-private>
