@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FenetreChatController">
-    
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FenetreChatController">
+   <children>
+       <Label fx:id="lblPseudoContact" layoutX="30.0" layoutY="35.0" text="Pseudo du contact">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Line endX="175.0" layoutX="131.0" layoutY="71.0" startX="-100.0" />
+      
+      <ListView fx:id="lvConversation" layoutX="30.0" layoutY="80.0" prefHeight="180.0" prefWidth="440.0" />
+      <TextArea fx:id="txtMessage" layoutX="30.0" layoutY="269.0" prefHeight="75.0" prefWidth="440.0" />
+      <Button layoutX="398.0" layoutY="360.0" mnemonicParsing="false" text="Envoyer" />
+   </children>
 </AnchorPane>

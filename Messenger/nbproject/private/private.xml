@@ -9,11 +9,6 @@
             <file>file:/D:/Bibliothèques/Documents/Java%20Projects/Java%20Messenger/JavaMessenger/Messenger/src/launch/Messenger.java</file>
             <file>file:/D:/Bibliothèques/Documents/Java%20Projects/Java%20Messenger/JavaMessenger/Messenger/src/controller/FenetreInscriptionController.java</file>
         </group>
-        <group>
-            <file>file:/C:/Users/Thomas/Documents/Projets/Java/JavaMessenger/Messenger/src/ihm/FenetreAjoutContact.fxml</file>
-            <file>file:/C:/Users/Thomas/Documents/Projets/Java/JavaMessenger/Messenger/src/controller/FenetreAjoutContactController.java</file>
-            <file>file:/C:/Users/Thomas/Documents/Projets/Java/JavaMessenger/Messenger/src/controller/FenetreInscriptionController.java</file>
-            <file>file:/C:/Users/Thomas/Documents/Projets/Java/JavaMessenger/Messenger/src/ihm/FenetreConnexion.fxml</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
