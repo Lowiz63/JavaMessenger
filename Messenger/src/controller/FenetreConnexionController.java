@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -32,22 +33,30 @@ public class FenetreConnexionController implements Initializable {
     @FXML
     private PasswordField txtPassword;
     
+    @FXML 
+    private Label msgerror;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        msgerror.setVisible(false);
         // TODO
     }    
     
     public void openMain(Event event) throws IOException{
         if(txtPseudo.getText().equals("user") && txtPassword.getText().equals("pass")){
+            
             ((Node)event.getSource()).getScene().getWindow().hide();
             Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("/ihm/MainWindow.fxml"));
             stage.setScene(new Scene(root,430,500));
             stage.setResizable(false);
             stage.centerOnScreen();
-            stage.setTitle("Java Messenger - Inscription");
+            stage.setTitle("Java Messenger - Page d'acceuil");
             
             stage.show();
+        }
+        else{
+            showError();
         }
     }
     
@@ -69,4 +78,8 @@ public class FenetreConnexionController implements Initializable {
         Platform.exit();
     }
     
+   
+    public void showError(){
+        msgerror.setVisible(true);
+    }
 }
