@@ -17,9 +17,11 @@ import javafx.scene.control.Label;
 public class Controlleur2 {
     
     //private int nb =100;
+    boolean stoped=false;
     private Thread t;
     @FXML
     Label lbNB;
+    
     
     @FXML
     public void initialize() throws InterruptedException{
@@ -31,6 +33,6 @@ public class Controlleur2 {
     @FXML
     public void annuler(Event e){
         ((Node)e.getSource()).getScene().getWindow().hide();
-        Thread.currentThread().interrupt();
+        stoped=true;
     }
 }
