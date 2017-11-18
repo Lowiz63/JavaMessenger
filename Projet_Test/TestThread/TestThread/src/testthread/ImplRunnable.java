@@ -7,22 +7,17 @@ package testthread;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 
 /**
  *
- * @author lulauriche
+ * @author blood
  */
 public class ImplRunnable extends Controlleur2 implements Runnable {
-    int nb;
     Thread t; 
-    int i=0;
     
     
     public ImplRunnable(){
         t = Thread.currentThread();
-        nb = 100;
     }
     
     @Override
@@ -33,22 +28,6 @@ public class ImplRunnable extends Controlleur2 implements Runnable {
             
             Logger.getLogger(ImplRunnable.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }
-    
-    @FXML
-    public synchronized void decompte() throws InterruptedException{
-        for(i=0; i<100;i++){
-            nb--;
-            System.out.println(i);
-            //lbNB.setText("reste : "+ nb);
-            if(stoped){
-                t.interrupt();
-            }
-            t.sleep(1000);
-        }
-        //lbNB.setText("BOOM!");
-        
         
     }
     
