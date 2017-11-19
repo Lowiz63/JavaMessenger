@@ -7,13 +7,13 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -21,20 +21,26 @@ import javafx.scene.input.KeyEvent;
  * @author thyzavard
  */
 public class FenetreChatController implements Initializable {
-
+    @FXML private Thread t;
     @FXML private Label lblPseudoContact;
     @FXML private TextArea txtMessage;
     @FXML private ListView lvConversation;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        t = new Thread(new RunnableChat());
+        t.start();
     }    
     
     public void onEnvoyerMessage(){
-        System.out.println("onEnvoyerMessage");
         lvConversation.getItems().add(txtMessage.getText());
         txtMessage.setText("");
+        
+    }
+    public void quitConv(ActionEvent e){
+        ((Node)e.getSource()).getScene().getWindow().hide();
+        System.out.println(t+" s'est stoppé");
+        t.interrupt();
         
     }
     
