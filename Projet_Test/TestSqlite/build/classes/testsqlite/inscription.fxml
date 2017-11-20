@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="270.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60" fx:controller="testsqlite.InscriptionController">
+   <children>
+      <TextField fx:id="txtPseudo" layoutX="215.0" layoutY="69.0" promptText="Pseudo" />
+      <TextField fx:id="txtMdp" layoutX="215.0" layoutY="125.0" promptText="Mot de passe" />
+      <Button layoutX="269.0" layoutY="194.0" mnemonicParsing="false" onAction="#inscrire" text="S'inscrire" />
+      <Label fx:id="isConnected" layoutX="94.0" layoutY="30.0" text="Label" />
+   </children>
+</AnchorPane>

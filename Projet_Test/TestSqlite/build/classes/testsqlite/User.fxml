@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="testsqlite.UserController">
+   <left>
+      <HBox prefHeight="400.0" prefWidth="472.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="userLb1" prefHeight="16.0" prefWidth="96.0" text="Bienvenue" />
+            <Button mnemonicParsing="false" onAction="#deconnexion" prefHeight="26.0" prefWidth="154.0" text="Se déconnecter">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </left>
+</BorderPane>
