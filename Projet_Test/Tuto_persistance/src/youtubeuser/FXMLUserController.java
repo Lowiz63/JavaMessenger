@@ -5,6 +5,7 @@
  */
 package youtubeuser;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,12 +17,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 /**
  *
@@ -60,8 +65,7 @@ public class FXMLUserController implements Initializable {
             ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM User");
             while (rs.next()) {
                 //get string from db,whichever way 
-                data.add(new UserDetails(rs.getString(1),rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getInt(6)));
-                
+                data.add(new UserDetails(rs.getString(1),rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6)));   
             }
 
         } catch (SQLException ex) {
@@ -77,6 +81,16 @@ public class FXMLUserController implements Initializable {
         tableUser.setItems(null);
         tableUser.setItems(data);
 
+    }
+    
+    public void AjouterUser() throws IOException{
+        Stage stage = new Stage();
+         Parent root = FXMLLoader.load(getClass().getResource("FenetreInscription.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+            stage.centerOnScreen();
+            stage.setTitle("Ajout user DataBase");
+            stage.show();
     }
 
 }

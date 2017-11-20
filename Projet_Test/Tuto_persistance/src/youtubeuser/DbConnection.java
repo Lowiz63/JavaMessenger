@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class DbConnection {
 
-    public Connection Connect() {
+    public static Connection Connect(){
         try {
             //Your database url string,ensure it is correct
             String url = "jdbc:mysql://hina:3306/dblopereira2";

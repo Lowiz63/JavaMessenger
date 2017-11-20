@@ -17,16 +17,16 @@ public class UserDetails {
     private final StringProperty pseudo;
     private final StringProperty mdp;
     private final StringProperty adresse;
-    private final IntegerProperty tel;
+    private final StringProperty tel;
 
     //Default constructor
-    public UserDetails(String nom, String prenom, String pseudo, String mdp, String adresse, int tel) {
+    public UserDetails(String nom, String prenom, String pseudo, String mdp, String adresse, String tel) {
         this.nom = new SimpleStringProperty(nom);
         this.prenom = new SimpleStringProperty(prenom);
         this.pseudo = new SimpleStringProperty(pseudo);
         this.mdp = new SimpleStringProperty(mdp);
         this.adresse = new SimpleStringProperty(adresse);
-        this.tel = new SimpleIntegerProperty(tel);
+        this.tel = new SimpleStringProperty(tel);
     }
 
     //Getters
@@ -50,7 +50,7 @@ public class UserDetails {
         return adresse.get();
     }
     
-    public int getTel() {
+    public String getTel() {
         return tel.get();
     }
 
@@ -75,7 +75,7 @@ public class UserDetails {
         adresse.set(value);
     }
     
-    public void setTel(int value) {
+    public void setTel(String value) {
         tel.set(value);
     }
 
@@ -100,7 +100,7 @@ public class UserDetails {
         return adresse;
     }
 
-    public IntegerProperty telProperty() {
+    public StringProperty telProperty() {
         return tel;
     }
     
