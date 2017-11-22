@@ -8,10 +8,10 @@ package launch;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import static managers.ThreadManager.stopThread;
 
 /**
  *
@@ -35,6 +35,11 @@ public class Messenger extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    @Override
+    public void stop(){
+        stopThread();
     }
     
 }

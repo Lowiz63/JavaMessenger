@@ -5,22 +5,23 @@
  */
 package controller;
 
-import javafx.application.Platform;
+import static managers.ThreadManager.addThread;
 
 /**
  *
  * @author blood
  */
 public class RunnableChat extends FenetreChatController implements Runnable {
-    private Thread t;
+    private Thread currentT;
     
     public RunnableChat(){
-        t = Thread.currentThread();
+        currentT = Thread.currentThread();
+        addThread(currentT);
     }
     
     @Override
     public void run() {
-            System.out.println(t+" est en cours ");
+            
             
     }
     
