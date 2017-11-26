@@ -13,7 +13,7 @@ import javafx.collections.ObservableList;
  *
  * @author lulauriche
  */
-public class Utilisateur implements Observable {
+public class Utilisateur implements Observable{
     private ObservableList<Utilisateur> listContact;
     private String nom;
     private String prenom;
@@ -23,6 +23,13 @@ public class Utilisateur implements Observable {
     private Estat statut;
     private boolean connect=false;
 
+    public Utilisateur (String nom, String prenom, String adresse,String login, String mdp){
+        this.setAdresse(adresse);
+        this.setLogin(login);
+        this.setMdp(mdp);
+        this.setNom(nom);
+        this.setPrenom(prenom);        
+    }
     public ObservableList<Utilisateur> getListContact() {
         return listContact;
     }

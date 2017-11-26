@@ -18,12 +18,14 @@ public class ThreadManager {
     public static void addThread(Thread threadAdded){
         
         listRunningThread.add(threadAdded);
+        System.out.println(threadAdded+" Ajouté");
         
     }
     
     public static void stopThread(){
         if(listRunningThread!=null){
             for(Thread t : listRunningThread){
+                System.out.println(t+" Stoppé");
                 t.interrupt();
             }
         }

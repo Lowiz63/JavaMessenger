@@ -5,8 +5,11 @@
  */
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import modèle.Contact;
 
 /**
  * FXML Controller class
@@ -28,7 +32,11 @@ public class FenetreChatController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        t = new Thread(new RunnableChat());
+        try {
+            t = new Thread(new RunnableChat(new Contact("nom", "prenom", "adresse", "login","mdp")));
+        } catch (IOException ex) {
+            Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         t.start();
     }    
     
