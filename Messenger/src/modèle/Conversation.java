@@ -16,6 +16,13 @@ public class Conversation {
     private Utilisateur receiver;
     private ObservableList<Message> chat;
 
+    public Conversation(Utilisateur sender, Utilisateur receiver, ObservableList<Message> chat) {
+        this.sender = sender;
+        this.receiver = receiver;
+        this.chat = chat;
+    }
+    
+    //<editor-fold desc="Getter/Setter" defaultstate="collapsed">
     public ObservableList<Message> getChat() {
         return chat;
     }
@@ -39,5 +46,6 @@ public class Conversation {
     public void setReceiver(Utilisateur receiver) {
         this.receiver = receiver;
     }
+    //</editor-fold>
     
 }

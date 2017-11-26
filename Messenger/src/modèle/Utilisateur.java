@@ -30,6 +30,8 @@ public class Utilisateur implements Observable{
         this.setNom(nom);
         this.setPrenom(prenom);        
     }
+    
+    //<editor-fold desc="Getter/Setter" defaultstate="collapsed">
     public ObservableList<Utilisateur> getListContact() {
         return listContact;
     }
@@ -98,7 +100,9 @@ public class Utilisateur implements Observable{
     public void setConnect(boolean connect) {
         this.connect = connect;
     }
-
+    //</editor-fold>
+    
+    
     // Methode abstraite d'observable
     @Override
     public void addListener(InvalidationListener listener) {

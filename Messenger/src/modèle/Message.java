@@ -13,9 +13,14 @@ import java.util.Date;
  */
 public class Message {
     private String contenu;
-    
     private Date date;
 
+    public Message(String contenu, Date date) {
+        this.contenu = contenu;
+        this.date = date;
+    }
+    
+    //<editor-fold desc="Getter/Setter" defaultstate="collapsed">
     public String getContenu() {
         return contenu;
     }
@@ -31,6 +36,6 @@ public class Message {
     public void setDate(Date date) {
         this.date = date;
     }
-    
+    //</editor-fold>
     
 }
