@@ -33,7 +33,7 @@ public class FenetreChatController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            t = new Thread(new RunnableChat(new Contact("nom", "prenom", "adresse", "login","mdp")));
+            t = new Thread(new RunnableChat(new Contact("nom", "prenom", "adresse", "login","mdp","statut")));
         } catch (IOException ex) {
             Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
         }
