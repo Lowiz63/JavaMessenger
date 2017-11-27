@@ -24,8 +24,8 @@ public class Contact extends Utilisateur implements Client, Serveur {
     PrintWriter outS,outC;
     Scanner saisie;
     
-    public Contact(String nom, String prenom, String adresse,String login, String mdp) throws IOException{
-        super(nom, prenom, adresse, login, mdp);
+    public Contact(String nom, String prenom, String adresse,String login, String mdp,String tel ) throws IOException{
+        super(nom, prenom,login, mdp, adresse,tel);
         saisie = new Scanner(System.in);
         socketServer = new ServerSocket(2345);        
     }

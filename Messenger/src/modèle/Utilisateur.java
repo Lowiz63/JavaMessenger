@@ -7,28 +7,46 @@ package modèle;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
+import static modèle.Etat.toEtat;
 
 /**
  *
  * @author lulauriche
  */
-public class Utilisateur implements Observable{
+public  class Utilisateur implements Observable{
     private ObservableList<Utilisateur> listContact;
-    private String nom;
-    private String prenom;
-    private String adresse;
-    private String login;
-    private String mdp;
-    private Estat statut;
-    private boolean connect=false;
 
-    public Utilisateur (String nom, String prenom, String adresse,String login, String mdp){
-        this.setAdresse(adresse);
-        this.setLogin(login);
-        this.setMdp(mdp);
-        this.setNom(nom);
-        this.setPrenom(prenom);        
+    private Etat statut;
+    private boolean connect=false;
+    
+    private final StringProperty nom;
+    private final StringProperty prenom;
+    private final StringProperty pseudo;
+    private final StringProperty mdp;
+    private final StringProperty adresse;
+    private final StringProperty tel;
+
+    public Utilisateur (String nom, String prenom, String pseudo,String mdp, String adresse,String tel, String statut){
+        this.nom = new SimpleStringProperty(nom);
+        this.prenom = new SimpleStringProperty(prenom);
+        this.pseudo = new SimpleStringProperty(pseudo);
+        this.mdp = new SimpleStringProperty(mdp);
+        this.adresse = new SimpleStringProperty(adresse);
+        this.tel = new SimpleStringProperty(tel);
+        this.statut=toEtat(statut);
+    }
+    
+    public Utilisateur (String nom, String prenom, String pseudo,String mdp, String adresse,String tel){
+        this.nom = new SimpleStringProperty(nom);
+        this.prenom = new SimpleStringProperty(prenom);
+        this.pseudo = new SimpleStringProperty(pseudo);
+        this.mdp = new SimpleStringProperty(mdp);
+        this.adresse = new SimpleStringProperty(adresse);
+        this.tel = new SimpleStringProperty(tel);
+        this.statut=toEtat("HORS_LIGNE");
     }
     
     //<editor-fold desc="Getter/Setter" defaultstate="collapsed">
@@ -41,55 +59,89 @@ public class Utilisateur implements Observable{
     }
 
     public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
+        return nom.get();
     }
 
     public String getPrenom() {
+        return prenom.get();
+    }
+
+    public String getPseudo() {
+        return pseudo.get();
+    }
+    
+    public String getMdp() {
+        return mdp.get();
+    }
+    
+    public String getAdresse() {
+        return adresse.get();
+    }
+    
+    public String getTel() {
+        return tel.get();
+    }
+
+    //Setters
+    public void setNom(String value) {
+        nom.set(value);
+    }
+
+    public void setPrenom(String value) {
+        prenom.set(value);
+    }
+
+    public void setPseudo(String value) {
+        pseudo.set(value);
+    }
+    
+    public void setMdp(String value) {
+        mdp.set(value);
+    }
+    
+    public void setAdresse(String value) {
+        adresse.set(value);
+    }
+    
+    public void setTel(String value) {
+        tel.set(value);
+    }
+
+    //Property values
+    public StringProperty nomProperty() {
+        return nom;
+    }
+
+    public StringProperty pseudoProperty() {
+        return pseudo;
+    }
+
+    public StringProperty prenomProperty() {
         return prenom;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getMdp() {
+    public StringProperty mdpProperty() {
         return mdp;
     }
 
-    public void setMdp(String mdp) {
-        this.mdp = mdp;
+    public StringProperty adresseProperty() {
+        return adresse;
     }
 
-    public Estat getStatut() {
+    public StringProperty telProperty() {
+        return tel;
+    }
+
+    public Etat getStatut() {
         return statut;
     }
 
     public void setStatut() {
         if(isConnect()){
-            this.statut=Estat.LIGNE;
+            this.statut=Etat.LIGNE;
         }
         else {
-            this.statut=Estat.HORS_LIGNE;
+            this.statut=Etat.HORS_LIGNE;
         }        
     }
 

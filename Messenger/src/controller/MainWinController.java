@@ -57,9 +57,16 @@ public class MainWinController {
             stage.show();
     }
     
-    public void Confirme(Event event){
+    public void Confirme(Event event) throws IOException{
         ((Node)event.getSource()).getScene().getWindow().hide();
-        Quitter();
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/ihm/FenetreConnexion.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+            stage.centerOnScreen();
+            stage.setTitle("Java Messenger - Profil");
+            stage.show();
+        
     }
     
     public void Quitter(){
@@ -68,6 +75,7 @@ public class MainWinController {
     
     public void Annuler(Event event){
         ((Node)event.getSource()).getScene().getWindow().hide();
+        
     }
     
     
