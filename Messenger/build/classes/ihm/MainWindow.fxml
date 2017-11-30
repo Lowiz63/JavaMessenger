@@ -110,6 +110,5 @@
       <ScrollBar orientation="VERTICAL" />
    </right>
    <bottom>
-      <Button text="Répondre" onAction="#newChat"/>
    </bottom>
 </BorderPane>
