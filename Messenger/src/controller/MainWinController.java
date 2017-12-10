@@ -5,6 +5,8 @@
  */
 package controller;
 
+import static DAL.MessageGateway.insertMessage;
+import static DAL.UserGateway.findUserByPseudo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +22,7 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -35,7 +38,7 @@ import modèle.Utilisateur;
  *
  * @author blood
  */
-public class MainWinController {
+public class MainWinController implements Initializable{
     @FXML    private Label lbPseudo;
     
     @FXML    private ListView<Utilisateur> lvContact= new ListView<>();
@@ -50,11 +53,18 @@ public class MainWinController {
     @FXML
     public void initialize(URL url, ResourceBundle rb){
         lbPseudo.setText("Pseudo Contact"); 
+        lcontacts.add(new Utilisateur("jean","marc","jojo","78974","93d","1515161"));
         bindingLW();
+        Utilisateur u1 =findUserByPseudo("ludoM5");
+        System.out.println(u1);
+        /*Utilisateur u2=findUserByPseudo("lolo63");
+        System.out.println(u2);
+        insertMessage("z12345","salut!",new Utilisateur("rs.getString(1)", "rs.getString(2)", "rs.getString(3)", "rs.getString(4)", "rs.getString(5)", "rs.getString(6)", "rs.getString(7)"),new Utilisateur("rs.get)", ".getString(2)", "rs.getString", "rs.getString(4)", "rs.getString(5)", "rs.getString(6)", "rs.getString(7)"));                
+        */
     }
     
     protected void bindingLW(){
-        lvContact.itemsProperty().bind(listContactProperty);        
+        lvContact.itemsProperty().bind(listContactProperty);         
         
         lvContact.setCellFactory(unused -> new ListCell<Utilisateur>(){
             @Override

@@ -17,6 +17,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import static managers.ThreadManager.addThread;
 import modèle.Contact;
 
 /**
@@ -33,11 +36,12 @@ public class FenetreChatController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            t = new Thread(new RunnableChat(new Contact("nom", "prenom", "adresse", "login","mdp","statut")));
+            t = new RunnableChat(new Contact("nom", "prenom", "adresse", "jojo","mdp","statut"),lblPseudoContact);
         } catch (IOException ex) {
             Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
         }
         t.start();
+        addThread(t);
     }    
     
     public void onEnvoyerMessage(){

@@ -5,6 +5,7 @@
  */
 package controller;
 
+import static DAL.UserGateway.insertUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -49,8 +50,6 @@ public class FenetreInscriptionController implements Initializable {
     @FXML
     private TextField txtTel;
     
-    private Connection conn = null;
-    private PreparedStatement pst = null;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -76,15 +75,6 @@ public class FenetreInscriptionController implements Initializable {
     
      @FXML
     public void onInscription(Event event) throws SQLException, IOException{
-        conn = DbConnection.Connect();
-        String sql="Insert into User(nom,prenom,pseudo,mdp,adresse,Tel) Values(?,?,?,?,?,?);";
-        String nom = txtNom.getText();
-        String prenom = txtPrenom.getText();
-        String pseudo = txtPseudo.getText();
-        String password = txtPassword.getText();
-        String password2 = txtPassword2.getText();
-        String adresse = txtAdresse.getText();
-        String tele = txtTel.getText();
         
         if(!txtPassword.getText().equals(txtPassword2.getText())){
             Alert alertMdp = new Alert(Alert.AlertType.INFORMATION);
@@ -93,35 +83,16 @@ public class FenetreInscriptionController implements Initializable {
             alertMdp.setHeaderText(null);
             alertMdp.showAndWait();
         }
+        insertUser(txtNom.getText(),txtPrenom.getText(), txtPseudo.getText(), txtPassword.getText(), txtAdresse.getText(),txtTel.getText());
+        ((Node)event.getSource()).getScene().getWindow().hide();
+         Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/ihm/MainWindow.fxml"));
+        stage.setScene(new Scene(root,500,400));
+        stage.setResizable(false);
+        stage.centerOnScreen();
+        stage.setTitle("Java Messenger - Connexion");
+        stage.show();
         
-        try {
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, nom);
-            pst.setString(2, prenom);
-            pst.setString(3, pseudo);
-            pst.setString(4, password);
-            pst.setString(5, adresse);
-            pst.setString(6, tele);
-            
-            int i = pst.executeUpdate();
-            if ( i ==1)
-                System.out.println("Utilisateur ajouter avec succès");
-            
-            // youtube: https://www.youtube.com/watch?v=jGJqVRTcDWI vers 30min
-        } catch (SQLException ex) {
-            Logger.getLogger(FenetreInscriptionController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
-            pst.close();
-            ((Node)event.getSource()).getScene().getWindow().hide();
-             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/ihm/MainWindow.fxml"));
-            stage.setScene(new Scene(root,500,400));
-            stage.setResizable(false);
-            stage.centerOnScreen();
-            stage.setTitle("Java Messenger - Connexion");
-            stage.show();
-        }
 
     }
     

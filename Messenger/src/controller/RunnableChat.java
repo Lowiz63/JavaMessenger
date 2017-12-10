@@ -8,6 +8,7 @@ package controller;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Label;
 import static managers.ThreadManager.addThread;
 import modèle.Contact;
 
@@ -15,33 +16,18 @@ import modèle.Contact;
  *
  * @author blood
  */
-public class RunnableChat implements Runnable {
-    private Thread currentT;
+public class RunnableChat extends Thread {
     private Contact contact;
+    private Label lbPseudo;
     
-    public RunnableChat(Contact c) throws IOException{
-        //this.contact=c;
-        //contact.lancerServeur();
-        //contact.lancerClient();
+    public RunnableChat(Contact c,Label lb){
+        this.contact=c;
+        this.lbPseudo= lb;
     }
     
     @Override
     public void run() {
-        currentT = Thread.currentThread();
-        addThread(currentT);
-        /*while(true){
-            
-            try {
-                contact.envoyerServeur();
-                contact.recevoirClient();
-                contact.envoyerClient();
-                contact.recevoirServeur();
-            } catch (IOException ex) {
-                Logger.getLogger(RunnableChat.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }*/
-            
+            lbPseudo.textProperty().bind(contact.pseudoProperty());
     }
     
 }
