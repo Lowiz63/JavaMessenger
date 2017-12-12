@@ -51,7 +51,7 @@ public class FenetreConnexionController implements Initializable {
     private Label msgerror;
     
     private ObservableList<Utilisateur> users;
-    
+    private Utilisateur user;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         msgerror.setVisible(false);
@@ -61,17 +61,21 @@ public class FenetreConnexionController implements Initializable {
     
     @FXML
     public void openMain(Event event) throws IOException{
-      
-         if(validationUser(txtPseudo.getText(),txtPassword.getText(),users)){
+      user=validationUser(txtPseudo.getText(),txtPassword.getText(),users);
+           MainWinController f;
+         if(user!=null){
             ((Node)event.getSource()).getScene().getWindow().hide();
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/ihm/MainWindow.fxml"));
-            stage.setScene(new Scene(root,430,500));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ihm/MainWindow.fxml"));
+            stage.setScene(new Scene(loader.load()));
+            f=loader.getController();
+            f.getUser(user);
             stage.setResizable(false);
             stage.centerOnScreen();
             stage.setTitle("Java Messenger - Page d'acceuil");
-            
             stage.show();
+            
+        
         }
         else{
             showError();

@@ -46,21 +46,16 @@ public class MainWinController implements Initializable{
     @FXML    private MenuButton statut;
     
     @FXML    private Image imgetat;
-    //pas effective
+
     ObservableList<Utilisateur> lcontacts= FXCollections.observableArrayList();
     private ListProperty<Utilisateur> listContactProperty = new SimpleListProperty<>(lcontacts);
+    public Utilisateur currentUser;
     
     @FXML
     public void initialize(URL url, ResourceBundle rb){
-        lbPseudo.setText("Pseudo Contact"); 
         lcontacts.add(new Utilisateur("jean","marc","jojo","78974","93d","1515161"));
         bindingLW();
-        Utilisateur u1 =findUserByPseudo("ludoM5");
-        System.out.println(u1);
-        /*Utilisateur u2=findUserByPseudo("lolo63");
-        System.out.println(u2);
-        insertMessage("z12345","salut!",new Utilisateur("rs.getString(1)", "rs.getString(2)", "rs.getString(3)", "rs.getString(4)", "rs.getString(5)", "rs.getString(6)", "rs.getString(7)"),new Utilisateur("rs.get)", ".getString(2)", "rs.getString", "rs.getString(4)", "rs.getString(5)", "rs.getString(6)", "rs.getString(7)"));                
-        */
+
     }
     
     protected void bindingLW(){
@@ -91,8 +86,9 @@ public class MainWinController implements Initializable{
                     }
                 });
     }
-    
+    @FXML
     public void onExit(Event event) throws IOException{
+
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/ihm/confirmation.fxml"));
         stage.setScene(new Scene(root));
@@ -100,10 +96,11 @@ public class MainWinController implements Initializable{
             stage.centerOnScreen();
             stage.setTitle("Java Messenger - Confirmation");
             stage.show();
+            ((Node)event.getSource()).getScene().getWindow().hide();
     }
     
     public void Confirme(Event event) throws IOException{
-        ((Node)event.getSource()).getScene().getWindow().hide();
+        //Platform.exit();
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/ihm/FenetreConnexion.fxml"));
         stage.setScene(new Scene(root));
@@ -129,19 +126,24 @@ public class MainWinController implements Initializable{
     }
     public void occupe(){
         statut.setText("Occupé");
+
     }
     public void horsLigne(){
         statut.setText("Hors ligne");
     }
 
     public void goProfil(Event event) throws IOException{
+       // System.out.println("usergoprofil:"+currentUser);
+        FenetreProfilController f;
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/ihm/FenetreProfil.fxml"));
-        stage.setScene(new Scene(root));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ihm/FenetreProfil.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        f=loader.getController();
+        f.getUserProfil(this.currentUser);
         stage.setResizable(false);
-            stage.centerOnScreen();
-            stage.setTitle("Java Messenger - Profil");
-            stage.show();
+        stage.centerOnScreen();
+        stage.setTitle("Java Messenger - Votre porfil");
+        stage.show();
     }
     
     public void newChat() throws IOException{
@@ -154,5 +156,9 @@ public class MainWinController implements Initializable{
         stage.show();
     }
     
+    public void getUser(Utilisateur user){
+        currentUser=user;
+       // System.out.println("user:"+currentUser);
+    }
     
 }
