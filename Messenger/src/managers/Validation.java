@@ -14,16 +14,16 @@ import modèle.Utilisateur;
  * @author ludo
  */
 public class Validation {
-    public static boolean validationUser(String username, String mdp, ObservableList<Utilisateur> users){
+    public static Utilisateur validationUser(String username, String mdp, ObservableList<Utilisateur> users){
         Iterator it=users.iterator();
         int i=0;
         while(it.hasNext()){
             if(users.get(i).getPseudo().equals(username)&&users.get(i).getMdp().equals(mdp)){
-                return true;
+                return users.get(i);
             }
             i++;
             it.next();
         }
-        return false;
+        return null;
     }
 }
