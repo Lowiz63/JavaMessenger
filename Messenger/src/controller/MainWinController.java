@@ -34,6 +34,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import modèle.Utilisateur;
 
@@ -42,24 +43,26 @@ import modèle.Utilisateur;
  * @author blood
  */
 public class MainWinController implements Initializable{
-    @FXML    private Label lbPseudo;
+    @FXML    private Label pseudo;
     
     @FXML    private ListView<Utilisateur> lvContact= new ListView<>();
     
     @FXML    private MenuButton statut;
     
-    @FXML    private Image imgetat;
+    @FXML    private ImageView imgetat;
 
     ObservableList<Utilisateur> lcontacts= FXCollections.observableArrayList();
     private ListProperty<Utilisateur> listContactProperty = new SimpleListProperty<>(lcontacts);
-    public Utilisateur currentUser;
+    public Utilisateur currentUser = new Utilisateur("jean","marc","jojo","78974","93d","1515161");
     
     @FXML
     public void initialize(URL url, ResourceBundle rb){
         lcontacts.add(new Utilisateur("jean","marc","jojo","78974","93d","1515161"));
         bindingLW();
+        
 
     }
+    
     
     protected void bindingLW(){
         lvContact.itemsProperty().bind(listContactProperty);         
@@ -88,6 +91,7 @@ public class MainWinController implements Initializable{
                         }
                     }
                 });
+        pseudo.textProperty().bind(currentUser.pseudoProperty());
     }
   
     
@@ -123,14 +127,20 @@ public class MainWinController implements Initializable{
     
     
     public void enLigne(){
-        statut.setText("En Ligne");      
+        statut.setText("En Ligne");  
+        Image ligne = new Image("/Images/img_en_ligne.png");
+        imgetat.setImage(ligne);
     }
     public void occupe(){
         statut.setText("Occupé");
+        Image occupe = new Image("/Images/img_occupe.png");
+        imgetat.setImage(occupe);
 
     }
     public void horsLigne(){
         statut.setText("Hors ligne");
+        Image hors_ligne = new Image("/Images/img_hors_connexion.png");
+        imgetat.setImage(hors_ligne);
     }
 
     public void goProfil(Event event) throws IOException{
@@ -159,7 +169,8 @@ public class MainWinController implements Initializable{
     
     public void getUser(Utilisateur user){
         currentUser=user;
-       System.out.println("user:"+currentUser);
+       
+       bindingLW();
     }
     
 }

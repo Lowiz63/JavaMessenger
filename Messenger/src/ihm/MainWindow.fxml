@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
@@ -14,7 +8,6 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollBar?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -24,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainWinController">
+<BorderPane xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainWinController">
    <top>
       <VBox>
          <children>
@@ -67,16 +60,22 @@
                      <GridPane.margin>
                         <Insets left="20.0" />
                      </GridPane.margin>
+                     <image>
+                        <Image url="@../Images/img_test_profil.png" />
+                     </image>
                   </ImageView>
                   <Label GridPane.halignment="CENTER" GridPane.rowSpan="2">
                      <GridPane.margin>
                         <Insets left="60.0" />
                      </GridPane.margin>
                   </Label>
-                  <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <ImageView fx:id="imgetat" fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="50.0" />
                      </GridPane.margin>
+                     <image>
+                        <Image url="@../Images/img_en_ligne.png" />
+                     </image>
                      
                   </ImageView>
                       <MenuButton fx:id="statut" text="En Ligne" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
@@ -86,6 +85,11 @@
                       <MenuItem mnemonicParsing="false" onAction="#horsLigne" text="Hors-ligne" />
                     </items>
                   </MenuButton>
+                  <Label fx:id="pseudo" text="Pseudo" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets top="5.0" />
+                     </GridPane.margin>
+                  </Label>
                </children>
             </GridPane>
          </children>
@@ -97,10 +101,10 @@
             <HBox>
                <children>
                   <ImageView pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="lbPseudo" />
+
                </children>
             </HBox>
-            <ListView fx:id="lvContact"/>
+            <ListView fx:id="lvContact" />
          </children>
       </VBox>
    </center>
