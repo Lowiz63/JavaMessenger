@@ -15,6 +15,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import modèle.Utilisateur;
 
 /**
@@ -35,11 +37,9 @@ public class FenetreChatController {
     
     public FenetreChatController(){
         try{
-            sock = new Socket("127.0.0.1", 4560);
+            sock = new Socket("127.0.0.1", 5007);
             dos = new DataOutputStream(sock.getOutputStream());
             dis = new DataInputStream(sock.getInputStream());
-            
-            dos.writeUTF("jo");
             
             th = new Thread(() -> {
                 try {
@@ -47,18 +47,17 @@ public class FenetreChatController {
                         String newMsg = dis.readUTF();
 
                         System.out.println("RE : " + newMsg);
-
+                        
                         lvConversation.appendText(newMsg + "\n");
                     }
                 } catch(IOException E) {
                     E.printStackTrace();
                 }
             });
-            
-        th.start();   
+            th.start();
             
         } catch (IOException e){
-            
+            e.printStackTrace();
         }
     }
     
@@ -72,22 +71,26 @@ public class FenetreChatController {
         } catch (IOException e){
             e.printStackTrace();
         }
-
-        
     }
+    
     public void quitConv(ActionEvent e){
+        
         ((Node)e.getSource()).getScene().getWindow().hide();
     }
     
-    /*public void onPressedEnter(KeyEvent e){
+    public void onPressedEnter(KeyEvent e){
         if(e.getCode() == KeyCode.ENTER){
            onEnvoyerMessage();
         }
-        System.out.println("onPressedEnter");
-    }*/
+    }
    
     public void getUserProfil(Utilisateur us){
-        name = us.getPseudo();
-        System.out.println("Pseudal : "+name);
+        try {
+            name = us.getPseudo();
+            dos.writeUTF(name);
+            System.out.println("Pseudal : "+name);
+        } catch (IOException ex) {
+            ex.printStackTrace();    
+        }
     } 
 }

@@ -14,7 +14,6 @@ public class Server {
     public static List<Client> clients;
     public static DataOutputStream dos;
     DataInputStream dis;
-//    MainWinController m;
     
     public Server(int port) {
         System.out.println("Server");
@@ -25,8 +24,6 @@ public class Server {
         clients = new ArrayList<Client>();
 
         try {
-//            int port = m.currentUser.getPort();
-//            System.out.println(port);
             ServerSocket servSock = new ServerSocket(port);
 
             while(true) {
@@ -39,7 +36,7 @@ public class Server {
                 System.out.println("Connected : " + name);
                 clients.add(user);
 
-                String enter_message = "{ \"name\" : \"" + "[ SERVER NOTICE ]" + "\", \"message\" : \"" + name +" Connected" + "\"}";
+                String enter_message = "{ " + name +" Connected" + " }";
                 System.out.println(enter_message);
                 List<Client> entry = Server.clients;
                 for (Client cli : entry) {

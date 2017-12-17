@@ -36,10 +36,9 @@ public class Client {
                 try {
                     dis.close();
                     dos.close();
-                    Server.clients = Server.clients.stream()
-                                     .filter(e -> {
+                    Server.clients = Server.clients.stream().filter(e -> {
                                     if(!(e == this)) {
-                                        String exit_message = "{ \"name\" : \"" + "[ SERVER NOTICE ]" + "\", \"message\" : \"" + name + " Disconnected" + "\"}";
+                                        String exit_message = "{ " + name + " Disconnected }";
                                         System.out.println(exit_message);
                                         try {
                                             e.getDos().writeUTF(exit_message);
@@ -48,8 +47,7 @@ public class Client {
                                         }
                                     }
                                     return !(e == this);
-                                    })
-                                .collect(Collectors.toList());
+                                    }).collect(Collectors.toList());
 
                     System.out.println("[Current User : " + Server.clients.size() + "]");
 

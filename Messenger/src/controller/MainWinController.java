@@ -5,9 +5,6 @@
  */
 package controller;
 
-import static DAL.ContactGateway.initializeContacts;
-import static DAL.MessageGateway.insertMessage;
-import static DAL.UserGateway.findUserByPseudo;
 import static DAL.UserGateway.updateStatut;
 import Server.Server;
 import java.io.IOException;
@@ -28,7 +25,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -67,7 +63,7 @@ public class MainWinController implements Initializable{
     @FXML
     public void initialize(URL url, ResourceBundle rb){
         lcontacts.add(new Utilisateur("jean","marc","jojo","78974","93d","1515161", 2048));
-        //bindingLW();
+        lcontacts.add(new Utilisateur("jean","marc","lulu","78974","93d","1515161", 2581));        
     }
     
     
