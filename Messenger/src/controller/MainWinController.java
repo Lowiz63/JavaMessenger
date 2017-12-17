@@ -9,6 +9,7 @@ import static DAL.MessageGateway.insertMessage;
 import static DAL.UserGateway.findUserByPseudo;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +27,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -86,21 +89,19 @@ public class MainWinController implements Initializable{
                     }
                 });
     }
-    @FXML
-    public void onExit(Event event) throws IOException{
-
-        Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/ihm/confirmation.fxml"));
-        stage.setScene(new Scene(root));
-        stage.setResizable(false);
-            stage.centerOnScreen();
-            stage.setTitle("Java Messenger - Confirmation");
-            stage.show();
-            ((Node)event.getSource()).getScene().getWindow().hide();
-    }
+  
     
-    public void Confirme(Event event) throws IOException{
+    public void onExit(Event event) throws IOException{
         //Platform.exit();
+        Alert alertDeco = new Alert(Alert.AlertType.CONFIRMATION);
+        alertDeco.setTitle("Deconnexion");
+        alertDeco.setContentText("Voulez vous vraiment vous déconnecter ?");
+        alertDeco.setHeaderText(null);
+        Optional<ButtonType> result = alertDeco.showAndWait();
+        if (result.get() == ButtonType.OK){
+            Platform.exit();
+        }
+        /*
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/ihm/FenetreConnexion.fxml"));
         stage.setScene(new Scene(root));
@@ -108,7 +109,7 @@ public class MainWinController implements Initializable{
             stage.centerOnScreen();
             stage.setTitle("Java Messenger - Profil");
             stage.show();
-        
+        */
     }
     
     public void Quitter(){
@@ -158,7 +159,7 @@ public class MainWinController implements Initializable{
     
     public void getUser(Utilisateur user){
         currentUser=user;
-       // System.out.println("user:"+currentUser);
+       System.out.println("user:"+currentUser);
     }
     
 }

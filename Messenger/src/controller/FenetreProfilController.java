@@ -37,7 +37,7 @@ public class FenetreProfilController {
 
     
     public void getUserProfil(Utilisateur us){
-         nom.setText(us.getNom());
+        nom.setText(us.getNom());
         prenom.setText(us.getPrenom());
         pseudo.setText(us.getPseudo());
         adresse.setText(us.getAdresse());

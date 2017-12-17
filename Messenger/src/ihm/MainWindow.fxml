@@ -77,9 +77,7 @@
                      <GridPane.margin>
                         <Insets left="50.0" />
                      </GridPane.margin>
-                     <image>
-                        <Image fx:id="imgetat" url="/Images/img_en_ligne.png" />
-                     </image>
+                     
                   </ImageView>
                       <MenuButton fx:id="statut" text="En Ligne" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                     <items>

@@ -27,6 +27,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import modèle.DbConnection;
+import modèle.Utilisateur;
 
 /**
  * FXML Controller class
@@ -52,7 +53,13 @@ public class FenetreInscriptionController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        txtNom.setText(null);
+        txtAdresse.setText(null);
+        txtPrenom.setText(null);
+        txtPassword.setText(null);
+        txtPassword2.setText(null);
+        txtPseudo.setText(null);
+        txtTel.setText(null);
     }    
     
     public void onExit(ActionEvent event){
@@ -63,7 +70,7 @@ public class FenetreInscriptionController implements Initializable {
             stage.setScene(new Scene(root,500,400));
             stage.setResizable(false);
             stage.centerOnScreen();
-            stage.setTitle("Java Messenger - Connexion");
+            stage.setTitle("Java Messenger - Bienvenue");
             stage.show();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -76,22 +83,37 @@ public class FenetreInscriptionController implements Initializable {
      @FXML
     public void onInscription(Event event) throws SQLException, IOException{
         
-        if(!txtPassword.getText().equals(txtPassword2.getText())){
+        
+         System.out.println("mon nom est :"+txtNom.getText());
+        if(txtNom.getText()==null || txtPrenom.getText()==null || txtPassword.getText()==null || txtPassword2.getText()==null || txtPseudo.getText()==null || txtTel.getText()==null || txtAdresse.getText()==null  ){
+            Alert alertMdp = new Alert(Alert.AlertType.INFORMATION);
+            alertMdp.setTitle("Attention");
+            alertMdp.setContentText("Veuillez remplir tous les champs !");
+            alertMdp.setHeaderText(null);
+            alertMdp.showAndWait();
+        }
+        else if(!txtPassword.getText().equals(txtPassword2.getText())){
             Alert alertMdp = new Alert(Alert.AlertType.INFORMATION);
             alertMdp.setTitle("Attention");
             alertMdp.setContentText("Les mots de passe ne correspondent pas.");
             alertMdp.setHeaderText(null);
             alertMdp.showAndWait();
-        }
-        insertUser(txtNom.getText(),txtPrenom.getText(), txtPseudo.getText(), txtPassword.getText(), txtAdresse.getText(),txtTel.getText());
-        ((Node)event.getSource()).getScene().getWindow().hide();
-         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/ihm/MainWindow.fxml"));
-        stage.setScene(new Scene(root,500,400));
-        stage.setResizable(false);
-        stage.centerOnScreen();
-        stage.setTitle("Java Messenger - Connexion");
-        stage.show();
+            }
+            else{
+            Utilisateur user=insertUser(txtNom.getText(),txtPrenom.getText(), txtPseudo.getText(), txtPassword.getText(), txtAdresse.getText(),txtTel.getText());
+            System.out.println(user);
+            ((Node)event.getSource()).getScene().getWindow().hide();
+            MainWinController f;
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ihm/MainWindow.fxml"));
+            stage.setScene(new Scene(loader.load(),500,400));
+            f=loader.getController();
+            f.getUser(user);
+            stage.setResizable(false);
+            stage.centerOnScreen();
+            stage.setTitle("Java Messenger - Connexion");
+            stage.show();
+            }
         
 
     }

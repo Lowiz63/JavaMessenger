@@ -91,7 +91,6 @@ public class FenetreConnexionController implements Initializable {
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/ihm/FenetreInscription.fxml"));
         stage.setScene(new Scene(root));
-        stage.setAlwaysOnTop(true);
         stage.setResizable(false);
         stage.centerOnScreen();
         stage.setTitle("Java Messenger - Inscription");
