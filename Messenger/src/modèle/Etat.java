@@ -14,13 +14,13 @@ public enum Etat {
     OCCUPE,
     HORS_LIGNE;
   public static Etat toEtat(String txt){
-        if (txt.equals(LIGNE)){
+        if (txt=="LIGNE"){
         return LIGNE;
         }
-        if (txt.equals(OCCUPE)){
+        if (txt=="OCCUPE"){
         return OCCUPE;
         }
-        if (txt.equals(HORS_LIGNE)){
+        if (txt=="HORS_LIGNE"){
         return HORS_LIGNE;
         }
         return null;

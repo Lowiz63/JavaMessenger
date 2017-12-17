@@ -5,8 +5,10 @@
  */
 package controller;
 
+import static DAL.ContactGateway.initializeContacts;
 import static DAL.MessageGateway.insertMessage;
 import static DAL.UserGateway.findUserByPseudo;
+import static DAL.UserGateway.updateStatut;
 import Server.Server;
 import java.io.IOException;
 import java.net.URL;
@@ -55,9 +57,12 @@ public class MainWinController implements Initializable{
 
     ObservableList<Utilisateur> lcontacts= FXCollections.observableArrayList();
     private ListProperty<Utilisateur> listContactProperty = new SimpleListProperty<>(lcontacts);
-    //public Utilisateur currentUser = new Utilisateur("jean","marc","jojo","78974","93d","1515161", 2048);
     public Utilisateur currentUser;
     private Thread th;
+
+    public void setLcontacts(ObservableList<Utilisateur> lcontacts) {
+        this.lcontacts = lcontacts;
+    }
     
     @FXML
     public void initialize(URL url, ResourceBundle rb){
@@ -104,6 +109,7 @@ public class MainWinController implements Initializable{
         alertDeco.setHeaderText(null);
         Optional<ButtonType> result = alertDeco.showAndWait();
         if (result.get() == ButtonType.OK){
+            updateStatut(currentUser);
             Platform.exit();
         }
     }
@@ -171,6 +177,18 @@ public class MainWinController implements Initializable{
         });
         ThreadManager.addThread(th);
         th.start();
+    }
+    public void onContact() throws IOException{
+        FenetreAjoutContactController f;
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ihm/FenetreAjoutContact.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        f=loader.getController();
+        f.setUser(this.currentUser);
+        stage.setResizable(false);
+        stage.centerOnScreen();
+        stage.setTitle("Java Messenger - Votre porfil");
+        stage.show();
     }
     
 }

@@ -20,9 +20,9 @@ public class DbConnection {
     public static Connection Connect(){
         try {
             //Your database url string,ensure it is correct
-            String url = "jdbc:mysql://localhost:3306/dbproject";
-            String user = "thyzavard";
-            String password = "thyzavard";
+            String url = "jdbc:mysql://localhost:3306/javamessenger";
+            String user = "root";
+            String password = "";
 
             Class.forName("com.mysql.jdbc.Driver");       
             Connection conn = DriverManager.getConnection(url, user, password);

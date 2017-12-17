@@ -11,11 +11,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import modèle.DbConnection;
+import modèle.Etat;
 import modèle.Utilisateur;
 
 /**
@@ -25,6 +27,9 @@ import modèle.Utilisateur;
 public class UserGateway {
     private static Connection co=DbConnection.Connect();;
     private static PreparedStatement pst;
+    private static ResultSet rs;
+    private static ObservableList<Utilisateur> users;
+    private static String sql;
     
     
     public static Utilisateur insertUser(String nom,String prenom, String pseudo, String password, String adresse, String tele, int port){
@@ -33,7 +38,7 @@ public class UserGateway {
             exit(1);
         }
         try {
-            String sql="Insert into user(nom,prenom,pseudo,mdp,adresse,Tel) Values(?,?,?,?,?,?);";
+            sql="Insert into user(nom,prenom,pseudo,mdp,adresse,Tel) Values(?,?,?,?,?,?,?);";
         
             pst = co.prepareStatement(sql);
             pst.setString(1, nom);
@@ -58,7 +63,6 @@ public class UserGateway {
             
     }
     public static ObservableList<Utilisateur> initializeUsers(){
-        ObservableList<Utilisateur> users;
         users = FXCollections.observableArrayList();
         if(co==null){
             System.out.println("Connexion Null");
@@ -66,15 +70,40 @@ public class UserGateway {
         }
         
         try {
-            ResultSet rs = co.createStatement().executeQuery("SELECT * FROM user");
+            rs = co.createStatement().executeQuery("SELECT * FROM user");
             while (rs.next()) {
                 users.add(new Utilisateur(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));                
             }
+            rs.close();
         } catch (SQLException SQLException) {
             System.out.println("Erreur chargement sql!");
         }
-        return users;
-        
+        return users;        
+    }
+     public static void updateStatut(Utilisateur user){
+        sql="UPDATE user SET statut=? WHERE pseudo=?";
+        try{
+            pst=co.prepareStatement(sql);
+            if(user.getStatut()==null){
+                user.setStatut("LIGNE");
+            }
+            else{
+                if(user.getStatut()==Etat.HORS_LIGNE){
+                    user.setStatut("LIGNE");
+                }  
+                else{
+                    user.setStatut("HORS_LIGNE");
+                }
+            }
+            pst.setString(1, user.getStatut().toString());
+            pst.setString(2, user.getPseudo());
+            pst.executeUpdate();
+            pst.close();
+        }
+        catch(Exception e){
+            System.err.println("Erreur de Maj du statut\n");
+            e.printStackTrace();
+        }
     }
     public static Utilisateur findUserByPseudo(String pseudo){
         Utilisateur user=null;
@@ -83,25 +112,30 @@ public class UserGateway {
             exit(1);
         }
         try{
-            System.out.println("ok");
-           ResultSet userFound=co.createStatement().executeQuery("SELECT * FROM user WHERE pseudo="+pseudo);
-            //String sql="SELECT * FROM USER WHERE pseudo="+pseudo+";";
-            //pst = co.prepareStatement(sql);
-            //pst.setString(1, pseudo);
-                    
-            //ResultSet userFound=pst.executeQuery();
-            System.out.println("ok");
-            System.out.println(userFound.getString(1));
-
-            user = new Utilisateur(userFound.getString(1),userFound.getString(2),userFound.getString(3),userFound.getString(4),userFound.getString(5),userFound.getString(6),userFound.getString(7), userFound.getInt(8));
-            
+            pst=co.prepareStatement("SELECT * FROM user WHERE pseudo=?");
+            pst.setString(1, pseudo);
+            rs=pst.executeQuery();
+            if(rs.next()){
+                
+            }
+            Iterator it=users.iterator();
+            int i=0;
+            while(it.hasNext()){
+                if(users.get(i).getPseudo().equals(rs.getString("pseudo"))){
+                    pst.close();
+                    return users.get(i);
+                }
+                i++;
+                it.next();
+            }
+            rs.close();
+            pst.close();
         }
         catch(SQLException sQLException){
             System.out.println("Erreur aucun utilisateur");
-        }
+            System.out.println(sQLException);
             
+        }
         return user;
-        
-      
     }
 }

@@ -18,11 +18,10 @@ import static modèle.Etat.toEtat;
  *
  * @author lulauriche
  */
-public  class Utilisateur implements Observable{
+public  class Utilisateur{
     private ObservableList<Utilisateur> listContact;
 
     private Etat statut;
-    private boolean connect=false;
     
     private final StringProperty nom;
     private final StringProperty prenom;
@@ -153,38 +152,17 @@ public  class Utilisateur implements Observable{
         return statut;
     }
 
-    public void setStatut() {
-        if(isConnect()){
-            this.statut=Etat.LIGNE;
-        }
-        else {
-            this.statut=Etat.HORS_LIGNE;
-        }        
-    }
-
-    public boolean isConnect() {
-        return connect;
-    }
-
-    public void setConnect(boolean connect) {
-        this.connect = connect;
+    public void setStatut(String actuel) {
+        this.statut=Etat.toEtat(actuel);
     }
     //</editor-fold>
-    
-    
-    // Methode abstraite d'observable
-    @Override
-    public void addListener(InvalidationListener listener) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    @Override
-    public void removeListener(InvalidationListener listener) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     @Override
    public String toString(){
        return "Nom: "+this.getNom()+" Prénom: "+this.getPrenom();
+   }
+   public void addUserToContact(Utilisateur contact){
+       listContact.add(contact);       
    }
     
 }

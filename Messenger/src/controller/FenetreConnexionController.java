@@ -5,7 +5,9 @@
  */
 package controller;
 
+import static DAL.ContactGateway.initializeContacts;
 import static DAL.UserGateway.initializeUsers;
+import static DAL.UserGateway.updateStatut;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -51,29 +53,26 @@ public class FenetreConnexionController implements Initializable {
     
     @FXML
     public void openMain(Event event) throws IOException{
-      user=validationUser(txtPseudo.getText(),txtPassword.getText(),users);
-           MainWinController f;
-         if(user!=null){
+        user=validationUser(txtPseudo.getText(),txtPassword.getText(),users);
+        initializeContacts(user);
+        updateStatut(user);
+        MainWinController f;
+        if(user!=null){
             ((Node)event.getSource()).getScene().getWindow().hide();
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ihm/MainWindow.fxml"));
             stage.setScene(new Scene(loader.load()));
             f=loader.getController();
             f.getUser(user);
+            f.setLcontacts(user.getListContact());
             stage.setResizable(false);
             stage.centerOnScreen();
             stage.setTitle("Java Messenger - Page d'acceuil");
             stage.show();
-            
-        
         }
         else{
             showError();
         }
-        
-        
- 
-
     }
     
     public void openInscription(Event event) throws IOException{

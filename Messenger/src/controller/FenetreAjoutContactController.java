@@ -5,13 +5,16 @@
  */
 package controller;
 
+import DAL.ContactGateway;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import modèle.Utilisateur;
 
 /**
  * FXML Controller class
@@ -22,14 +25,41 @@ public class FenetreAjoutContactController implements Initializable {
 
     @FXML private TextField txtPseudoAjout;
     @FXML private TextField txtMessageAjout;
+    @FXML private Label add;
+    @FXML private Label error;
+    private Utilisateur user;
+
+    public Utilisateur getUser() {
+        return user;
+    }
+
+    public void setUser(Utilisateur user) {
+        this.user = user;
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        add.setVisible(false);
+        error.setVisible(false);
     }    
     
     public void onAjoutContact(ActionEvent event){
+        try{
+        if(ContactGateway.insertContact(user, txtPseudoAjout.getText())){
+            txtPseudoAjout.setText("");
+            error.setVisible(false);
+            add.setVisible(true);
+        }
+        else{
+            error.setVisible(true);
+            add.setVisible(false);
+        }
         
+        
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
     public void onExit(ActionEvent event){

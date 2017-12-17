@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FenetreAjoutContactController">
+<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FenetreAjoutContactController">
    <children>
       <TextField fx:id="txtPseudoAjout" layoutX="100.0" layoutY="137.0" prefHeight="25.0" prefWidth="180.0" promptText="Pseudo du contact à ajouter">
          <font>
@@ -42,5 +42,7 @@
             </Label>
          </children>
       </VBox>
+      <Label fx:id="add" layoutX="100.0" layoutY="167.0" text="Contact ajouté !" textFill="#06ab3d" />
+      <Label fx:id="error" layoutX="190.0" layoutY="167.0" text="Contact inconnu ou déjà ajouté !" textFill="#f20000" />
    </children>
 </AnchorPane>

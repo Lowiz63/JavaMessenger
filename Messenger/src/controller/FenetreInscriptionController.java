@@ -82,9 +82,6 @@ public class FenetreInscriptionController implements Initializable {
     
      @FXML
     public void onInscription(Event event) throws SQLException, IOException{
-        
-        
-         System.out.println("mon nom est :"+txtNom.getText());
         if(txtNom.getText()==null || txtPrenom.getText()==null || txtPassword.getText()==null || txtPassword2.getText()==null || txtPseudo.getText()==null || txtTel.getText()==null || txtAdresse.getText()==null  ){
             Alert alertMdp = new Alert(Alert.AlertType.INFORMATION);
             alertMdp.setTitle("Attention");

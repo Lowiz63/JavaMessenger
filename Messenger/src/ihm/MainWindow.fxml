@@ -25,7 +25,7 @@
               <menus>
                 <Menu text="Contact">
                   <items>
-                    <MenuItem text="Ajouter un nouveau" />
+                    <MenuItem text="Ajouter un nouveau" onAction="#onContact" />
                   </items>
                 </Menu>
                 <Menu text="Profil">
