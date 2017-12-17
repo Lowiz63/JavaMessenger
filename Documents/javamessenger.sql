@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  Dim 17 déc. 2017 à 14:50
+-- Généré le :  Dim 17 déc. 2017 à 19:36
 -- Version du serveur :  10.1.28-MariaDB
 -- Version de PHP :  7.1.11
 
@@ -91,7 +91,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`nom`, `prenom`, `pseudo`, `mdp`, `adresse`, `tel`, `statut`, `port`) VALUES
 ('Pereira', 'loann', 'lolo63', '123456', '41 avenue bidule', '0605040302', 'HORS_LIGNE', 5001),
-('Laurichesse', 'Ludovic', 'ludoM5', 'bmw', '12 rue du machin', '063357232', 'LIGNE', 5002),
+('Laurichesse', 'Ludovic', 'ludoM5', 'bmw', '12 rue du machin', '063357232', 'HORS_LIGNE', 5002),
 ('jeanjean', 'michel', 'michou', '123', '123 av jean', '123456789', 'HORS_LIGNE', 5003),
 ('Dupret', 'Michel', 'mimidu52', '1234', 'rue du truc', '0605040302', 'HORS_LIGNE', 5004),
 ('Atelais', 'Sylvain', 'Myn4s', 'yolo', 'rue du rageux', '6666666666', 'HORS_LIGNE', 5005),
