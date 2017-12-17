@@ -163,7 +163,7 @@ public  class Utilisateur{
        return "Nom: "+this.getNom()+" Prénom: "+this.getPrenom();
    }
    public void addUserToContact(Utilisateur contact){
-       listContact.add(contact);       
+       this.listContact.add(contact);       
    }
     
 }

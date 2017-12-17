@@ -5,6 +5,7 @@
  */
 package controller;
 
+import static DAL.UserGateway.findUserByPseudo;
 import static DAL.UserGateway.updateStatut;
 import Server.Server;
 import java.io.IOException;
@@ -51,10 +52,11 @@ public class MainWinController implements Initializable{
     
     @FXML    private ImageView imgetat;
 
-    ObservableList<Utilisateur> lcontacts= FXCollections.observableArrayList();
-    private ListProperty<Utilisateur> listContactProperty = new SimpleListProperty<>(lcontacts);
+    
     public Utilisateur currentUser;
-    private Thread th;
+    public ObservableList<Utilisateur> lcontacts;
+    public Thread th;
+    public Utilisateur currentContact;
     
     @FXML
     public void initialize(URL url, ResourceBundle rb){
@@ -62,31 +64,32 @@ public class MainWinController implements Initializable{
     
     
     protected void bindingLW(){
-        lvContact.itemsProperty().bind(listContactProperty);         
-        
-        lvContact.setCellFactory(unused -> new ListCell<Utilisateur>(){
-            @Override
-            protected void updateItem(Utilisateur item, boolean empty) {
-                super.updateItem(item, empty);
-                if(!isEmpty()){
-                    textProperty().bind(item.pseudoProperty());
-                }else{
-                    textProperty().unbind();
-                    textProperty().setValue(null);
-                }
-            }
+        lvContact.setItems(lcontacts);
+        lvContact.setCellFactory((param) -> {
+            return new ListCell<Utilisateur>(){
+               @Override
+                protected void updateItem(Utilisateur user, boolean empty) {
+                    super.updateItem(user, empty);
+                    if (!empty) {
+                        textProperty().bind(user.pseudoProperty());
+                    } else {
+                        textProperty().unbind();
+                        setText("");
+                    }
+                }  
+            };
         });
-        
-        lvContact.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Utilisateur>() {
-            public void changed(ObservableValue<? extends Utilisateur> observable, Utilisateur oldValue, Utilisateur newValue) {
-                if(newValue!=null)
+        lvContact.getSelectionModel().selectedItemProperty().addListener((o,old,newV)->{
+            if(newV!=null)
                     try {
+                        currentContact= newV;
                         newChat();
                 } catch (IOException ex) {
                     Logger.getLogger(MainWinController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
         });
+        
+        
         pseudo.textProperty().bind(currentUser.pseudoProperty());
     }
   
@@ -150,7 +153,8 @@ public class MainWinController implements Initializable{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ihm/FenetreChat.fxml"));
         stage.setScene(new Scene(loader.load()));
         f=loader.getController();
-        f.getUserProfil(currentUser);
+        f.lancement(currentUser,currentContact);
+        
         stage.setResizable(false);
         stage.centerOnScreen();
         stage.setTitle("Java Messenger - Conversation");

@@ -33,34 +33,15 @@ public class FenetreChatController {
     private Socket sock;
     private DataOutputStream dos;
     private DataInputStream dis;
-    private String name;
-    
-    public FenetreChatController(){
-        try{
-            sock = new Socket("127.0.0.1", 5007);
-            dos = new DataOutputStream(sock.getOutputStream());
-            dis = new DataInputStream(sock.getInputStream());
-            
-            th = new Thread(() -> {
-                try {
-                    while(true) {
-                        String newMsg = dis.readUTF();
+    private Socket sock2;
 
-                        System.out.println("RE : " + newMsg);
-                        
-                        lvConversation.appendText(newMsg + "\n");
-                    }
-                } catch(IOException E) {
-                    E.printStackTrace();
-                }
-            });
-            th.start();
-            
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    }
+    private String name;
+    private int port;
     
+   
+    public void getPort(int port){
+        this.port= port;
+    }
     public void onEnvoyerMessage(){
         try{
             String msg = txtMessage.getText();
@@ -84,13 +65,37 @@ public class FenetreChatController {
         }
     }
    
-    public void getUserProfil(Utilisateur us){
+    public void lancement(Utilisateur us, Utilisateur uscont){
         try {
-            name = us.getPseudo();
+            this.port=us.getPort();
+            this.name = us.getPseudo();
+            System.out.println(this.port);
+            sock = new Socket("127.0.0.1", 5001);
+            dos = new DataOutputStream(sock.getOutputStream());
+            dis = new DataInputStream(sock.getInputStream());
             dos.writeUTF(name);
-            System.out.println("Pseudal : "+name);
+            //System.out.println("Pseudal : "+name);
         } catch (IOException ex) {
             ex.printStackTrace();    
         }
+        
+
+            
+            th = new Thread(() -> {
+                try {
+                    while(true) {
+                        String newMsg = dis.readUTF();
+
+                        System.out.println("RE : " + newMsg);
+                        
+                        lvConversation.appendText(newMsg + "\n");
+                    }
+                } catch(IOException E) {
+                    E.printStackTrace();
+                }
+            });
+            th.start();
+            
+     
     } 
 }

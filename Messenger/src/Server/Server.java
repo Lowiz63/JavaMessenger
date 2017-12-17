@@ -14,12 +14,12 @@ public class Server {
     public static List<Client> clients;
     public static DataOutputStream dos;
     DataInputStream dis;
-    
+    String name;
+    Socket client;
     public Server(int port) {
         System.out.println("Server");
         
-        String name;
-        Socket client;
+        
 
         clients = new ArrayList<Client>();
 
