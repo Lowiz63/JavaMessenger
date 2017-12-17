@@ -64,7 +64,6 @@ public class FenetreConnexionController implements Initializable {
             stage.setScene(new Scene(loader.load()));
             f=loader.getController();
             f.getUser(user);
-            f.setLcontacts(user.getListContact());
             stage.setResizable(false);
             stage.centerOnScreen();
             stage.setTitle("Java Messenger - Page d'acceuil");

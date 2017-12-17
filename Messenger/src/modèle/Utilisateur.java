@@ -11,6 +11,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import static modèle.Etat.toEtat;
 
@@ -19,7 +20,7 @@ import static modèle.Etat.toEtat;
  * @author lulauriche
  */
 public  class Utilisateur{
-    private ObservableList<Utilisateur> listContact;
+    private ObservableList<Utilisateur> listContact= FXCollections.observableArrayList();
 
     private Etat statut;
     

@@ -55,15 +55,9 @@ public class MainWinController implements Initializable{
     private ListProperty<Utilisateur> listContactProperty = new SimpleListProperty<>(lcontacts);
     public Utilisateur currentUser;
     private Thread th;
-
-    public void setLcontacts(ObservableList<Utilisateur> lcontacts) {
-        this.lcontacts = lcontacts;
-    }
     
     @FXML
     public void initialize(URL url, ResourceBundle rb){
-        lcontacts.add(new Utilisateur("jean","marc","jojo","78974","93d","1515161", 2048));
-        lcontacts.add(new Utilisateur("jean","marc","lulu","78974","93d","1515161", 2581));        
     }
     
     
@@ -165,7 +159,7 @@ public class MainWinController implements Initializable{
     
     public void getUser(Utilisateur user){
         currentUser=user;
-       
+        this.lcontacts=currentUser.getListContact();
         bindingLW();
         System.out.println("port:"+currentUser.getPort());
         th = new Thread(() -> {

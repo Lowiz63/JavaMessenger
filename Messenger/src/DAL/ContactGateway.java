@@ -39,11 +39,9 @@ public class ContactGateway {
             rs=pst.executeQuery();
             while(rs.next()){
                 if(rs.getString("userOne").equals(user.getPseudo())){
-                    System.out.println("1");
                     user.addUserToContact(findUserByPseudo(rs.getString("userTwo")));
                 }
                 if(rs.getString("userTwo").equals(user.getPseudo())){
-                    System.out.println("2");
                     user.addUserToContact(findUserByPseudo(rs.getString("userOne")));
                 }
             }
@@ -72,7 +70,7 @@ public class ContactGateway {
                 }
                 pst.executeUpdate();
                 pst.close();
-                //user.addUserToContact(users.get(i));
+                user.addUserToContact(users.get(i));
                 return true;
             }
             i++;
