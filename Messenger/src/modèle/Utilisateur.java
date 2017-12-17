@@ -7,6 +7,8 @@ package modèle;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
@@ -28,24 +30,27 @@ public  class Utilisateur implements Observable{
     private final StringProperty mdp;
     private final StringProperty adresse;
     private final StringProperty tel;
+    private final IntegerProperty port;
 
-    public Utilisateur (String nom, String prenom, String pseudo,String mdp, String adresse,String tel, String statut){
+    public Utilisateur (String nom, String prenom, String pseudo,String mdp, String adresse,String tel, String statut, int port){
         this.nom = new SimpleStringProperty(nom);
         this.prenom = new SimpleStringProperty(prenom);
         this.pseudo = new SimpleStringProperty(pseudo);
         this.mdp = new SimpleStringProperty(mdp);
         this.adresse = new SimpleStringProperty(adresse);
         this.tel = new SimpleStringProperty(tel);
+        this.port = new SimpleIntegerProperty(port);
         this.statut=toEtat(statut);
     }
     
-    public Utilisateur (String nom, String prenom, String pseudo,String mdp, String adresse,String tel){
+    public Utilisateur (String nom, String prenom, String pseudo,String mdp, String adresse,String tel, int port){
         this.nom = new SimpleStringProperty(nom);
         this.prenom = new SimpleStringProperty(prenom);
         this.pseudo = new SimpleStringProperty(pseudo);
         this.mdp = new SimpleStringProperty(mdp);
         this.adresse = new SimpleStringProperty(adresse);
         this.tel = new SimpleStringProperty(tel);
+        this.port = new SimpleIntegerProperty(port);
         this.statut=toEtat("HORS_LIGNE");
     }
     
@@ -81,6 +86,10 @@ public  class Utilisateur implements Observable{
     public String getTel() {
         return tel.get();
     }
+    
+    public int getPort(){
+        return port.get();
+    }
 
     //Setters
     public void setNom(String value) {
@@ -107,6 +116,10 @@ public  class Utilisateur implements Observable{
         tel.set(value);
     }
 
+    public void setPort(int value){
+        port.set(value);
+    }
+    
     //Property values
     public StringProperty nomProperty() {
         return nom;
@@ -132,6 +145,10 @@ public  class Utilisateur implements Observable{
         return tel;
     }
 
+    public IntegerProperty portProperty(){
+        return port;
+    }
+    
     public Etat getStatut() {
         return statut;
     }

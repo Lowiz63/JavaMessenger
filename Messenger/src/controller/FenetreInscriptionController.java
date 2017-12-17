@@ -100,7 +100,7 @@ public class FenetreInscriptionController implements Initializable {
             alertMdp.showAndWait();
             }
             else{
-            Utilisateur user=insertUser(txtNom.getText(),txtPrenom.getText(), txtPseudo.getText(), txtPassword.getText(), txtAdresse.getText(),txtTel.getText());
+            Utilisateur user=insertUser(txtNom.getText(),txtPrenom.getText(), txtPseudo.getText(), txtPassword.getText(), txtAdresse.getText(),txtTel.getText(), 5000); //AUTO INCREMENT EN BASE 
             System.out.println(user);
             ((Node)event.getSource()).getScene().getWindow().hide();
             MainWinController f;

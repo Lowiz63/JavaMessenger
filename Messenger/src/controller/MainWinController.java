@@ -7,6 +7,7 @@ package controller;
 
 import static DAL.MessageGateway.insertMessage;
 import static DAL.UserGateway.findUserByPseudo;
+import Server.Server;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -36,6 +37,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import managers.ThreadManager;
 import modèle.Utilisateur;
 
 /**
@@ -53,14 +55,14 @@ public class MainWinController implements Initializable{
 
     ObservableList<Utilisateur> lcontacts= FXCollections.observableArrayList();
     private ListProperty<Utilisateur> listContactProperty = new SimpleListProperty<>(lcontacts);
-    public Utilisateur currentUser = new Utilisateur("jean","marc","jojo","78974","93d","1515161");
+    //public Utilisateur currentUser = new Utilisateur("jean","marc","jojo","78974","93d","1515161", 2048);
+    public Utilisateur currentUser;
+    private Thread th;
     
     @FXML
     public void initialize(URL url, ResourceBundle rb){
-        lcontacts.add(new Utilisateur("jean","marc","jojo","78974","93d","1515161"));
-        bindingLW();
-        
-
+        lcontacts.add(new Utilisateur("jean","marc","jojo","78974","93d","1515161", 2048));
+        //bindingLW();
     }
     
     
@@ -79,18 +81,17 @@ public class MainWinController implements Initializable{
                 }
             }
         });
-        lvContact.getSelectionModel().selectedItemProperty()
-                .addListener(new ChangeListener<Utilisateur>() {
-                    public void changed(ObservableValue<? extends Utilisateur> observable,
-                                        Utilisateur oldValue, Utilisateur newValue) {
-                        if(newValue!=null)
-                            try {
-                                newChat();
-                        } catch (IOException ex) {
-                            Logger.getLogger(MainWinController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                });
+        
+        lvContact.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Utilisateur>() {
+            public void changed(ObservableValue<? extends Utilisateur> observable, Utilisateur oldValue, Utilisateur newValue) {
+                if(newValue!=null)
+                    try {
+                        newChat();
+                } catch (IOException ex) {
+                    Logger.getLogger(MainWinController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
         pseudo.textProperty().bind(currentUser.pseudoProperty());
     }
   
@@ -105,15 +106,6 @@ public class MainWinController implements Initializable{
         if (result.get() == ButtonType.OK){
             Platform.exit();
         }
-        /*
-        Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/ihm/FenetreConnexion.fxml"));
-        stage.setScene(new Scene(root));
-        stage.setResizable(false);
-            stage.centerOnScreen();
-            stage.setTitle("Java Messenger - Profil");
-            stage.show();
-        */
     }
     
     public void Quitter(){
@@ -122,7 +114,6 @@ public class MainWinController implements Initializable{
     
     public void Annuler(Event event){
         ((Node)event.getSource()).getScene().getWindow().hide();
-        
     }
     
     
@@ -153,24 +144,33 @@ public class MainWinController implements Initializable{
         f.getUserProfil(this.currentUser);
         stage.setResizable(false);
         stage.centerOnScreen();
-        stage.setTitle("Java Messenger - Votre porfil");
+        stage.setTitle("Java Messenger - Votre profil");
         stage.show();
     }
     
     public void newChat() throws IOException{
-        Stage stage=new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/ihm/FenetreChat.fxml"));
-        stage.setScene(new Scene(root));
+        FenetreChatController f;
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ihm/FenetreChat.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        f=loader.getController();
+        f.getUserProfil(currentUser);
         stage.setResizable(false);
         stage.centerOnScreen();
-        stage.setTitle("Java Messenger - Chat");
+        stage.setTitle("Java Messenger - Conversation");
         stage.show();
     }
     
     public void getUser(Utilisateur user){
         currentUser=user;
        
-       bindingLW();
+        bindingLW();
+        System.out.println("port:"+currentUser.getPort());
+        th = new Thread(() -> {
+            new Server(currentUser.getPort());
+        });
+        ThreadManager.addThread(th);
+        th.start();
     }
     
 }

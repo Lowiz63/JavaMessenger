@@ -27,7 +27,7 @@ public class UserGateway {
     private static PreparedStatement pst;
     
     
-    public static Utilisateur insertUser(String nom,String prenom, String pseudo, String password, String adresse, String tele){
+    public static Utilisateur insertUser(String nom,String prenom, String pseudo, String password, String adresse, String tele, int port){
         if(co==null){
             System.out.println("Connexion Null");
             exit(1);
@@ -42,11 +42,12 @@ public class UserGateway {
             pst.setString(4, password);
             pst.setString(5, adresse);
             pst.setString(6, tele);
+            pst.setInt(8, port);
             
             int i = pst.executeUpdate();
             if ( i ==1)System.out.println("Utilisateur ajouter avec succès");
             pst.close();
-            return new Utilisateur(nom,prenom,pseudo,password,adresse,tele);
+            return new Utilisateur(nom,prenom,pseudo,password,adresse,tele, port);
             
             // youtube: https://www.youtube.com/watch?v=jGJqVRTcDWI vers 30min
         } 
@@ -67,7 +68,7 @@ public class UserGateway {
         try {
             ResultSet rs = co.createStatement().executeQuery("SELECT * FROM user");
             while (rs.next()) {
-                users.add(new Utilisateur(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));                
+                users.add(new Utilisateur(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));                
             }
         } catch (SQLException SQLException) {
             System.out.println("Erreur chargement sql!");
@@ -92,7 +93,7 @@ public class UserGateway {
             System.out.println("ok");
             System.out.println(userFound.getString(1));
 
-            user = new Utilisateur(userFound.getString(1),userFound.getString(2),userFound.getString(3),userFound.getString(4),userFound.getString(5),userFound.getString(6),userFound.getString(7));
+            user = new Utilisateur(userFound.getString(1),userFound.getString(2),userFound.getString(3),userFound.getString(4),userFound.getString(5),userFound.getString(6),userFound.getString(7), userFound.getInt(8));
             
         }
         catch(SQLException sQLException){

@@ -5,55 +5,78 @@
  */
 package controller;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.net.Socket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import static managers.ThreadManager.addThread;
-import modèle.Contact;
+import javafx.scene.control.TextField;
+import modèle.Utilisateur;
 
 /**
  * FXML Controller class
  *
  * @author thyzavard
  */
-public class FenetreChatController implements Initializable {
-    @FXML private Thread t;
+public class FenetreChatController {
     @FXML private Label lblPseudoContact;
-    @FXML private TextArea txtMessage;
-    @FXML private ListView lvConversation;
+    @FXML private TextField txtMessage;
+    @FXML private TextArea lvConversation;
     
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        try {
-            t = new RunnableChat(new Contact("nom", "prenom", "adresse", "jojo","mdp","statut"),lblPseudoContact);
-        } catch (IOException ex) {
-            Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
+    public static Thread th;
+    private Socket sock;
+    private DataOutputStream dos;
+    private DataInputStream dis;
+    private String name;
+    
+    public FenetreChatController(){
+        try{
+            sock = new Socket("127.0.0.1", 4560);
+            dos = new DataOutputStream(sock.getOutputStream());
+            dis = new DataInputStream(sock.getInputStream());
+            
+            dos.writeUTF("jo");
+            
+            th = new Thread(() -> {
+                try {
+                    while(true) {
+                        String newMsg = dis.readUTF();
+
+                        System.out.println("RE : " + newMsg);
+
+                        lvConversation.appendText(newMsg + "\n");
+                    }
+                } catch(IOException E) {
+                    E.printStackTrace();
+                }
+            });
+            
+        th.start();   
+            
+        } catch (IOException e){
+            
         }
-        t.start();
-        addThread(t);
-    }    
+    }
     
     public void onEnvoyerMessage(){
-        lvConversation.getItems().add(txtMessage.getText());
-        txtMessage.setText("");
+        try{
+            String msg = txtMessage.getText();
+            dos.writeUTF(name + ": " + msg);
+            //lvConversation.appendText(name + " : " + msg + "\n");
+            txtMessage.setText("");
+            txtMessage.requestFocus();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
         
     }
     public void quitConv(ActionEvent e){
         ((Node)e.getSource()).getScene().getWindow().hide();
-        System.out.println(t+" s'est stoppé");
-        t.interrupt();
-        
     }
     
     /*public void onPressedEnter(KeyEvent e){
@@ -62,5 +85,9 @@ public class FenetreChatController implements Initializable {
         }
         System.out.println("onPressedEnter");
     }*/
-    
+   
+    public void getUserProfil(Utilisateur us){
+        name = us.getPseudo();
+        System.out.println("Pseudal : "+name);
+    } 
 }
