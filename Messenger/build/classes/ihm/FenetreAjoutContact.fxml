@@ -8,20 +8,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FenetreAjoutContactController">
+<AnchorPane id="AnchorPane" prefHeight="259.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FenetreAjoutContactController">
    <children>
       <TextField fx:id="txtPseudoAjout" layoutX="100.0" layoutY="137.0" prefHeight="25.0" prefWidth="180.0" promptText="Pseudo du contact à ajouter">
          <font>
             <Font size="11.0" />
          </font></TextField>
       <Label layoutX="100.0" layoutY="120.0" text="Pseudo : " />
-      <Label layoutX="100.0" layoutY="188.0" text="Invitations personnelle : " />
-      <TextField fx:id="txtMessageAjout" layoutX="100.0" layoutY="205.0" prefHeight="25.0" prefWidth="400.0" promptText="Entrer un message à envoyer à ce contact">
-         <font>
-            <Font size="11.0" />
-         </font></TextField>
-      <Button layoutX="328.0" layoutY="281.0" mnemonicParsing="false" onAction="#onAjoutContact" text="Ajouter un contact" />
-      <Button layoutX="493.0" layoutY="281.0" mnemonicParsing="false" onAction="#onExit" prefWidth="80.0" text="Annuler" />
+      <Button layoutX="277.0" layoutY="203.0" mnemonicParsing="false" onAction="#onAjoutContact" text="Ajouter un contact" />
+      <Button layoutX="442.0" layoutY="203.0" mnemonicParsing="false" onAction="#onExit" prefWidth="80.0" text="Annuler" />
       <VBox prefHeight="108.0" prefWidth="600.0">
          <children>
             <Label text="Ajouter un contact">
